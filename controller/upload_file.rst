@@ -20,10 +20,19 @@ in the ``Product`` entity::
 
     use Doctrine\ORM\Mapping as ORM;
     use Symfony\Component\Validator\Constraints as Assert;
-
+    
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="product")
+     */
     class Product
     {
-        // ...
+        /**
+         * @ORM\Column(type="integer")
+         * @ORM\Id
+         * @ORM\GeneratedValue(strategy="AUTO")
+        */
+        protected $id;
 
         /**
          * @ORM\Column(type="string")
@@ -32,6 +41,11 @@ in the ``Product`` entity::
          * @Assert\File(mimeTypes={ "application/pdf" })
          */
         private $brochure;
+
+        public function getId()
+        {
+           return $this->id;
+        }
 
         public function getBrochure()
         {
